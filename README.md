@@ -11,7 +11,7 @@ I now present: Chess 2!
 Fixed bug where pawns will suddenly become another piece when they reach the end of the board.\
 Fixed 'Castling' bug where the king can teleport behind a rook.\
 Fixed strange obscure bug wherein a pawn could capture another pawn next to it "in passing" if it moved two squares the previous move.\
-Removed the h5 square.\
+Removed the h5 square.
 
 ## New features:
 - Replaced white and black teams with the Red Republic and Blue Empire.
