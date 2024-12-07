@@ -182,7 +182,6 @@ export class MassRevive extends ActionItem {
         super("massRevive", 66666, "Revive all pieces of your color.");
     }
     doAction(piece: Piece): void {
-        let underworld = piece.board.game.getBoard("underworld");
         for (let i = 0; i < 10; i++) {
             for (let j = 0; j < 10; j++) {
                 if (piece.board.data[i][j].piece?.color === piece.color) {
@@ -219,7 +218,7 @@ function SaleItem({item, buyer}: SaleItemProps) {
     return (
         <div className="shop-item">
             <p>{name}</p>
-            <img src={"/images/" + forSale.type + "_" + forSale.name + ".png"} onClick={() => forSale.buy(buyer)}/>
+            <img src={"/images/" + forSale.type + "_" + forSale.name + ".png"} onClick={() => forSale.buy(buyer)} alt={forSale.name}/>
             <p>{forSale.description}</p>
             <p>Cost: {forSale.cost}</p>
         </div>
