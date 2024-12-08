@@ -1,3 +1,4 @@
+netlify deployment: https://idyllic-stardust-aad806.netlify.app/
 # Chess 2: The long-awaited sequel to chess
 \
 \
