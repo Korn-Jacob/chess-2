@@ -67,11 +67,12 @@ export class GameInstance {
         return this.boards.filter(board => board.name === name)[0];
     }
     interdimensionalTravel(boardFrom: BoardInstance, boardTo: BoardInstance, position: Position) {
+        let piece = boardFrom.data[position.row][position.column].piece!;
+        boardFrom.data[position.row][position.column].piece = null;
         if (boardTo.data[position.row][position.column].piece)
             boardTo.killPiece(position);
-        boardTo.data[position.row][position.column].piece = boardFrom.data[position.row][position.column].piece;
-        boardFrom.data[position.row][position.column].piece = null;
-        boardTo.data[position.row][position.column].piece!.board = boardTo;
+        boardTo.data[position.row][position.column].piece = piece;
+        piece.board = boardTo;
         this.endTurn();
     }
     finances(color: string): FinancialSituation {
@@ -170,11 +171,19 @@ export default function Main() {
             {shop ? 
                 <Shop name={shop.name} buyer={shop.buyer} exit={shop.exit}/> 
             : <></>}
-            <div className="finances">
-                <p>{game.turn.charAt(0).toUpperCase() + game.turn.substring(1)}'s Finances</p>
-                <p><b>Bank:</b> {game.finances(game.turn).bank}</p>
-                <p><b>Tax:</b> {game.finances(game.turn).tax}/turn <button onClick={taxIncrease} title="(costs popular opinion and ends turn)">Force increase</button></p>
-                <p><b>Popular Opinion:</b> {Math.round(game.finances(game.turn).popularOpinion * 100)}%</p>
+            <div className="finances-holder">
+                <div className="finances">
+                    <p>Red's Finances</p>
+                    <p><b>Bank:</b> {game.redFinances.bank}</p>
+                    <p><b>Tax:</b> {game.redFinances.tax}/turn <button style={{display: game.turn === "red" ? "inline": "none"}} onClick={game.turn === "red" ? taxIncrease : () => {}} title="(costs popular opinion and ends turn)">Force increase</button></p>
+                    <p><b>Popular Opinion:</b> {Math.round(game.redFinances.popularOpinion * 100)}%</p>
+                </div>
+                <div className="finances">
+                    <p>Blue's Finances</p>
+                    <p><b>Bank:</b> {game.blueFinances.bank}</p>
+                    <p><b>Tax:</b> {game.blueFinances.tax}/turn <button style={{display: game.turn === "blue" ? "inline" : "none"}} onClick={game.turn === "blue" ? taxIncrease : () => {}} title="(costs popular opinion and ends turn)">Force increase</button></p>
+                    <p><b>Popular Opinion:</b> {Math.round(game.blueFinances.popularOpinion * 100)}%</p>
+                </div>
             </div>
             <p style={{color: board.game.turn}}>It is {board.game.turn}'s turn!</p>
             <Board board={board} shop={(shop: ShopInstance) => setShop(shop)}/>

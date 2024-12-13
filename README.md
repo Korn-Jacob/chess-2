@@ -14,6 +14,7 @@ Fixed strange obscure bug wherein a pawn could capture another pawn next to it "
 Removed the h5 square.
 
 ## New features:
+- Board expansion: the board is now 10x10 instead of 8x8
 - Replaced white and black teams with the Red Republic and Blue Empire.
 - Starting player is randomized.
 - The Blue Empire has two Queens (diversity win!)

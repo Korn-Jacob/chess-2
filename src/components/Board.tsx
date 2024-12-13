@@ -104,7 +104,6 @@ export class BoardInstance {
             }
         }
         let killedPiece = this.data[position.row][position.column].piece;
-        // should this be in onDeath? yes. do i care? no, i'm lazy
         if (this.name === "mainBoard") {
             if (killedPiece?.color === "blue") {
                 if (killedPiece instanceof Queen) {

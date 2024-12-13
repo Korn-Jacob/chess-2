@@ -157,7 +157,7 @@ export class Archer extends ImmovablePiece {
         super.clickAction();
         for (let i = 0; i < 10; i++) {
             for (let j = 0; j < 10; j++) {
-                if (Math.abs(this.position.row - i) + Math.abs(this.position.column - j) < 4 && (i !== this.position.row || j !== this.position.column) && this.board.data[i][j].tileModifier !== TileModifier.CIRCLED) {
+                if (Math.abs(this.position.row - i) + Math.abs(this.position.column - j) < 4 && (i !== this.position.row || j !== this.position.column) && this.board.data[i][j].tileModifier !== TileModifier.CIRCLED && this.board.data[i][j].tileModifier !== TileModifier.GIVE) {
                     this.board.showArcherTile(position(i,j), this.color);
                 }
             }

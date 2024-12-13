@@ -88,9 +88,14 @@ html, body, #root, .main {
   font-weight: bold;
 }
 
-.finances {
+.finances-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   left: 200px;
+  flex-direction: column;
+  gap: 50px;
 }
 
 .finances > p {
