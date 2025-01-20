@@ -98,7 +98,7 @@ export class FinancialSituation {
         this.popularOpinion = Math.max(this.popularOpinion - popularOpinion, 0);
     }
     changePopularOpinion(popularOpinion: number): void {
-        if (popularOpinion < 0) this.decreasePopularOpinion(popularOpinion);
+        if (popularOpinion < 0) this.decreasePopularOpinion(-popularOpinion);
         else this.increasePopularOpinion(popularOpinion);
     }
 }

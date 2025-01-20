@@ -227,10 +227,10 @@ function SaleItem({item, buyer}: SaleItemProps) {
 
 export default function Shop({name, buyer, exit}: ShopProps) {
     useState(() => {
-        window.addEventListener("keydown", (e) => e.key === "Escape" ? exit(null) : (() => {})());
+        window.addEventListener("keydown", (e) => e.key === "Escape" ? exit() : (() => {})());
     });
     return (
-        <div className="shop-background" onClick={() => exit(null)}>
+        <div className="shop-background" onClick={() => exit()}>
             <div className="shop">
                 <h1>Shop! (click on an item's image to buy)</h1>
                 <div className="shop-item-container">

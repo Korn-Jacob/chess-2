@@ -43,7 +43,7 @@ export default function Tile({board, position, shop}: TileProps) {
         board.game.endTurn();
     }
     const openShop = () => {
-        let toOpen: ShopInstance = {name: board.name, buyer: data.piece as Piece, exit: shop};
+        let toOpen: ShopInstance = {name: board.name, buyer: data.piece as Piece, exit: () => shop(null)};
         shop(toOpen);
     }
     const give = () => {
