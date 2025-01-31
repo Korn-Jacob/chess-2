@@ -22,7 +22,7 @@ type TileProps = { board: BoardInstance, position: Position, shop: Function };
 
 export default function Tile({board, position, shop}: TileProps) {
     const data: TileData = board.data[position.row][position.column];
-    const color = data.isRemoved ? "white" : (position.row + position.column) % 2 === 0 ? (board.name === "mainBoard" ? "#779556" : "#821724") : (board.name === "mainBoard" ? "#ebecd0" : "#7d6568");
+    const color = data.isRemoved ? "black" : (position.row + position.column) % 2 === 0 ? (board.name === "mainBoard" ? "#779556" : "#821724") : (board.name === "mainBoard" ? "#ebecd0" : "#7d6568");
     
     const onClick = data.piece ? () => data.piece?.clickAction() : () => {if (data.tileModifier === null || data.tileModifier === TileModifier.ARCHER_EMPTY) board.game.clearSelected()};
     const moveSelectedHere = () => {

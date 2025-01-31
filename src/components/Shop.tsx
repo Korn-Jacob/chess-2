@@ -102,7 +102,7 @@ export class Bomb extends UpgradeItem {
 
 export class FinancialEducation extends UpgradeItem {
     constructor() {
-        super("financialEducation", 6666, "Allows the piece to be used like the finance minister. You will need to leave the shop before using it.");
+        super("financialEducation", 1000, "Allows the piece to be used like the finance minister. You will need to leave the shop before using it.");
     }
     whenAttached(): void {
     }
@@ -179,7 +179,7 @@ export class Gamble extends ActionItem {
 
 export class MassRevive extends ActionItem {
     constructor() {
-        super("massRevive", 66666, "Revive all pieces of your color.");
+        super("massRevive", 6666, "Revive all pieces of your color.");
     }
     doAction(piece: Piece): void {
         for (let i = 0; i < 10; i++) {

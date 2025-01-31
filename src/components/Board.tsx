@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Tile, { TileModifier, TileType } from "./Tile.tsx";
 import { FinanceMinister, Pawn, Piece, President, Queen, Wizard } from "../types/pieces.ts";
-import { GameInstance } from "../Main.tsx";
+import { GameInstance } from "../pages/GamePage.tsx";
 
 export interface Position {
     row: number,
