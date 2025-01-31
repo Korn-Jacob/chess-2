@@ -1,0 +1,11 @@
+.howtoplay-background * {
+    font-family: "Comic Sans MS";
+    color: #ebecd0;
+}
+
+.howtoplay-background {
+    background-color: #779556;
+    width: 100%;
+    height: 5000px;
+    overflow-y: scroll;
+}

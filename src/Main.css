@@ -1,0 +1,49 @@
+html, body, #root, .game-background {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+    font-family: "Comic Sans MS";
+    color: #ebecd0;
+}
+
+.main-background {
+    background-color: #779556;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.startbuttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 40px;
+}
+
+.startbuttons > button, .back-button {
+    width: 60px;
+    height: 60px;
+    color: #821724;
+    background-color: #7d6568;
+    border: none;
+    border-radius: 5px;
+}
+
+.startbuttons > button:hover {
+    transform: scale(1.125);
+}
+
+.startbuttons > button:active {
+    transform: scale(1.25);
+}
