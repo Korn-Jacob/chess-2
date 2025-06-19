@@ -10,7 +10,8 @@ export enum TileModifier {
     FINANCE,
     GIVE,
     ARCHER_EMPTY,
-    ARCHER_X_ED
+    ARCHER_X_ED,
+    ARCHER_RELOADING
 }
 
 export enum TileType {
@@ -76,6 +77,7 @@ export default function Tile({board, position, shop}: TileProps) {
             : data.tileModifier === TileModifier.GIVE ? <div className="tile-modifier-circle" title="Give" onClick={give}>G</div>
             : data.tileModifier === TileModifier.ARCHER_EMPTY ? <div className="tile-modifier-archer" onClick={onClick}></div>
             : data.tileModifier === TileModifier.ARCHER_X_ED ? <div className="tile-modifier-archer" onClick={shoot}><p>X</p></div>
+            : data.tileModifier === TileModifier.ARCHER_RELOADING ? <div className="tile-modifier-circle" onClick={() => board.game.clearSelected()}>R</div>
             : <></>}
         </div>
     )

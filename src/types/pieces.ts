@@ -65,6 +65,8 @@ export abstract class Piece {
             upgrade.onDeath();
         }
     }
+
+    onTurnPass(): void {}
 }
 
 export abstract class ImmovablePiece extends Piece {
@@ -145,8 +147,10 @@ export class Elephant extends Piece {
 }
 
 export class Archer extends ImmovablePiece {
+    cooldown: number;
     constructor(board: BoardInstance, position: Position, color: string) {
         super("Archer", board, position, color);
+        this.cooldown = 0;
     }
     clickAction(): void {
         if (this.color !== this.board.game.turn) return;
@@ -155,6 +159,10 @@ export class Archer extends ImmovablePiece {
             return;
         }
         super.clickAction();
+        if (this.cooldown !== 0) {
+            this.board.showArcherReloading(this.position);
+            return;
+        }
         for (let i = 0; i < 10; i++) {
             for (let j = 0; j < 10; j++) {
                 if (Math.abs(this.position.row - i) + Math.abs(this.position.column - j) < 4 && (i !== this.position.row || j !== this.position.column) && this.board.data[i][j].tileModifier !== TileModifier.CIRCLED && this.board.data[i][j].tileModifier !== TileModifier.GIVE) {
@@ -162,6 +170,9 @@ export class Archer extends ImmovablePiece {
                 }
             }
         }
+    }
+    onTurnPass(): void {
+        this.cooldown = Math.max(0, this.cooldown - 1);
     }
 }
 

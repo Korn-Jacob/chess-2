@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Tile, { TileModifier, TileType } from "./Tile.tsx";
-import { FinanceMinister, Pawn, Piece, President, Queen, Wizard } from "../types/pieces.ts";
+import { Archer, FinanceMinister, Pawn, Piece, President, Queen, Wizard } from "../types/pieces.ts";
 import { GameInstance } from "../pages/GamePage.tsx";
 
 export interface Position {
@@ -20,35 +20,22 @@ export class BoardInstance {
         this.name = name;
         this.data = data;
     }
+    getPieces(): Piece[] {
+        let out: Piece[] = [];
+        for (let i = 0; i < 10; i++)
+            for (let j = 0; j < 10; j++) 
+                if (this.data[i][j].piece) 
+                    out.push(this.data[i][j].piece!);
+        return out;
+    }
     hasPieces(): boolean {
-        for (let i = 0; i < 10; i++) {
-            for (let j = 0; j < 10; j++) {
-                if (this.data[i][j].piece) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return this.getPieces().length !== 0;
     }
     hasQueens(): boolean {
-        for (let i = 0; i < 10; i++) {
-            for (let j = 0; j < 10; j++) {
-                if (this.data[i][j].piece instanceof Queen) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return this.getPieces().filter(piece => piece instanceof Queen).length !== 0;
     }
     promoteRandomPawn(): void {
-        let pawns: Pawn[] = [];
-        for (let i = 0; i < 10; i++) {
-            for (let j = 0; j < 10; j++) {
-                if (this.data[i][j].piece instanceof Pawn && this.data[i][j].piece?.color === "red") {
-                    pawns.push(this.data[i][j].piece as Pawn);
-                }
-            }
-        }
+        let pawns: Pawn[] = this.getPieces().filter(piece => piece instanceof Pawn && piece.color === "red");
         if (pawns.length === 0) {
             this.game.winner = "blue";
             return;
@@ -71,6 +58,9 @@ export class BoardInstance {
     }
     showGive(position: Position): void {
         this.data[position.row][position.column].tileModifier = TileModifier.GIVE;
+    }
+    showArcherReloading(position: Position): void {
+        this.data[position.row][position.column].tileModifier = TileModifier.ARCHER_RELOADING;
     }
     clearSelected(): void {
         for (let i = 0; i < 10; i++) {
@@ -111,15 +101,19 @@ export class BoardInstance {
                     this.game.finances("red").increasePopularOpinion(0.2);
                 } else if (!(killedPiece instanceof Pawn)) {
                     this.game.finances("blue").decreasePopularOpinion(0.05);
+                    this.game.finances("red").increasePopularOpinion(0.02);
                 }
             } else {
                 if (killedPiece instanceof President) {
                     this.promoteRandomPawn();
                     this.game.finances("red").decreasePopularOpinion(0.35);
+                    this.game.finances("blue").increasePopularOpinion(0.05);
                 } else if (killedPiece instanceof FinanceMinister) {
                     this.game.finances("red").decreasePopularOpinion(0.15);
+                    this.game.finances("blue").increasePopularOpinion(0.02);
                 } else {
-                    this.game.finances("red").decreasePopularOpinion(0.07)
+                    this.game.finances("red").decreasePopularOpinion(0.07);
+                    this.game.finances("blue").increasePopularOpinion(0.01);
                 }
             }
             this.data[position.row][position.column].piece = null;
@@ -127,8 +121,10 @@ export class BoardInstance {
 
     }
     archerShoot(position: Position): void {
-        if (this.data[position.row][position.column].piece!.shield === 0)
+        if (this.data[position.row][position.column].piece!.shield === 0) {
             this.killPiece(position);
+            (this.game.selectedPiece as Archer).cooldown = 4;
+        }
         else this.data[position.row][position.column].piece!.shield--;
 
         this.game.endTurn()

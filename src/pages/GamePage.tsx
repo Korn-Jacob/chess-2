@@ -10,8 +10,8 @@ export class GameInstance {
     boards: BoardInstance[];
     selectedPiece: Piece | null;
     winner: string | null;
-    blueFinances = new FinancialSituation(110, 5, 0.75);
-    redFinances = new FinancialSituation(100, 5, 1);
+    blueFinances = new FinancialSituation(1000, 5, 0.75);
+    redFinances = new FinancialSituation(250, 5, 1);
     constructor() {
         this.turn = Math.random() < 0.5 ? "red" : "blue";
         this.boards = [];
@@ -27,6 +27,11 @@ export class GameInstance {
     endTurn(): void {
         this.clearSelected();
         this.turn = this.turn === "red" ? "blue" : "red";
+        this.boards.forEach(board => {
+            board.getPieces().forEach(piece => {
+                if (piece.color === this.turn) piece.onTurnPass()
+            }
+        )});
 
         // upkeep stuff
         this.finances(this.turn).bank += Math.floor(this.finances(this.turn).popularOpinion * this.finances(this.turn).tax);
@@ -194,5 +199,4 @@ export default function GamePage() {
             : <></>}
         </div>
     )
-    
 }

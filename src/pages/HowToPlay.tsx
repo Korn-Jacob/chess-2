@@ -70,7 +70,7 @@ export default function HowToPlay() {
                 <p>The Elephant works just like the Horse from Chess 1, but has the ability to capture pieces adjacent to it as well.</p>
                 <li><b>The Archer:</b></li>
                 <img src="/images/red_Archer.png" alt="ARCHER"/>
-                <p>The Archer is immobile, but has the ability to shoot any piece within 3 tiles away from it. The shot piece will die unless protected by a shield. The tiles that can be shot by the Archer are revealed when clicked on.</p>
+                <p>The Archer is immobile, but has the ability to shoot any piece within 3 tiles away from it. The shot piece will die unless protected by a shield. The tiles that can be shot by the Archer are revealed when clicked on. After shooting, will reload for the next 3 turns; this will be indicated by an 'R' when clicked.</p>
                 <li><b>The Wizard and the Pope:</b></li>
                 <img src="/images/red_Wizard.png" alt="WIZARD"/> <img src="/images/red_Pope.png" alt="POPE"/>
                 <p>

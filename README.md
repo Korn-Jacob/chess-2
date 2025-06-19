@@ -40,7 +40,7 @@ Removed the h5 square.
 The Elephant works just like the Horse from Chess 1, but can capture pieces adjacent to it as well.
 ### The Archer
 ![Archer](./public/images/red_Archer.png)\
-The Archer cannot move, but it can shoot pieces 3 tiles away from it (taxicab distance). Shot pieces will die.
+The Archer cannot move, but it can shoot pieces 3 tiles away from it (taxicab distance). Shot pieces will die, but the Archer will need a break to reload.
 ### The Wizard and the Pope
 ![Wizard](./public/images/red_Wizard.png) ![Pope](./public/images/red_Pope.png)\
 The bishops from Chess 1 are gone as religious tensions increase. Now they are replaced with the Pope and the Wizard!\
